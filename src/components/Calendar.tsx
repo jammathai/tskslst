@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Cell from './Cell'
-import { Setter } from '../../util/Setter'
+import Setter from '../util/Setter'
 
 export default function Calendar(
   { setSelectedDate }: { setSelectedDate: Setter<Date> }
@@ -47,7 +47,7 @@ export default function Calendar(
       <select onChange={e => setYear(parseInt(e.target.value))}>
         {yearOptions}
       </select>
-      <table>
+      <table className='text-left'>
         <thead>
           <tr>
             <th>Sunday</th>
