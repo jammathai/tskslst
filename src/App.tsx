@@ -29,7 +29,7 @@ export default function App() {
         <Calendar setSelectedDate={setSelectedDate} />
         <DayPane selectedDate={selectedDate} />
       </div>
-      <TaskModal />
+      {selectedTask ? <TaskModal /> : <></>}
     </GlobalContext.Provider>
   );
 }

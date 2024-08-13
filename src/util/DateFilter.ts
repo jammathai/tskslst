@@ -1,15 +1,15 @@
 export interface DateFilter {
-  check(date: Date): boolean
+  check(date: Date): boolean;
 }
 
 export class OnceDateFilter implements DateFilter {
-  date: Date
+  date: Date;
 
   constructor(date: Date) {
-    this.date = date
+    this.date = date;
   }
 
   check(date: Date) {
-    return date.getTime() === this.date.getTime()
+    return date.getTime() === this.date.getTime();
   }
 }

@@ -4,12 +4,10 @@ import Task from "../util/Task";
 
 export default function TaskModal() {
   const { tasks, setTasks, selectedTask, setSelectedTask } = useGlobalContext();
+  if (!selectedTask)
+    throw new Error("Attempted to render task modal with no task selected.");
 
-  if (!selectedTask) return <></>;
-
-  const newTask = useRef(
-    new Task(selectedTask.name, selectedTask.dateFilter, selectedTask.id)
-  );
+  const newTask = useRef(Task.fromParent(selectedTask));
 
   function closeModal() {
     setTasks(
