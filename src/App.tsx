@@ -3,7 +3,7 @@ import Calendar from "./components/Calendar";
 import DayPane from "./components/DayPane";
 import TaskModal from "./components/TaskModal";
 import { OnceDateFilter } from "./util/DateFilter";
-import Task from "./util/Task";
+import Task, { TaskType } from "./util/Task";
 import { GlobalContext } from "./util/GlobalContext";
 
 export default function App() {
@@ -16,9 +16,21 @@ export default function App() {
   );
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [tasks, setTasks] = useState([
-    new Task("Do something", new OnceDateFilter(new Date(2024, 7, 6))),
-    new Task("Do something else", new OnceDateFilter(new Date(2024, 7, 8))),
-    new Task("Do a third something", new OnceDateFilter(new Date(2024, 7, 8))),
+    new Task(
+      "Do something",
+      TaskType.DO,
+      new OnceDateFilter(new Date(2024, 7, 6))
+    ),
+    new Task(
+      "Do something else",
+      TaskType.DO,
+      new OnceDateFilter(new Date(2024, 7, 8))
+    ),
+    new Task(
+      "Homework",
+      TaskType.DUE,
+      new OnceDateFilter(new Date(2024, 7, 8))
+    ),
   ]);
 
   return (
