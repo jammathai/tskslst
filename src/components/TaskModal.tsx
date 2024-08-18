@@ -16,33 +16,56 @@ export default function TaskModal() {
     setSelectedTask(null);
   }
 
+  const h1 = (
+    <h1 className="font-bold">
+      <input
+        className="w-full"
+        defaultValue={selectedTask.name}
+        onChange={(event) => (selectedTask.name = event.target.value)}
+      />
+    </h1>
+  );
+
+  const estimate = (
+    <label className="block">
+      Estimate{" "}
+      <input
+        type="number"
+        className="w-12 h-5 border-b-2"
+        defaultValue={selectedTask.estimate}
+        onChange={(event) =>
+          (selectedTask.estimate = parseFloat(event.target.value))
+        }
+      />
+    </label>
+  );
+
+  const taskType = (
+    <select
+      defaultValue={selectedTask.type}
+      onChange={(event) => {
+        selectedTask.type = parseInt(event.target.value);
+        forceUpdate();
+      }}
+    >
+      <option value={TaskType.DUE}>Due</option>
+      <option value={TaskType.DO}>Do</option>
+    </select>
+  );
+
   return (
     <div
-      className="fixed w-screen h-screen left-0 top-0 z-0 bg-black bg-opacity-10 flex items-center"
+      className="fixed w-screen h-screen left-0 top-0 z-0 bg-black bg-opacity-10 backdrop-blur-md flex items-center"
       onClick={closeModal}
     >
       <div
-        className="w-80 h-80 m-auto p-1 bg-white"
+        className="w-80 h-40 m-auto p-2 bg-white"
         onClick={(event) => event.stopPropagation()}
       >
-        <h1 className="font-bold">
-          <input
-            className="w-full"
-            defaultValue={selectedTask.name}
-            onChange={(event) => (selectedTask.name = event.target.value)}
-          />
-        </h1>
+        {h1}
         <ColorPicker task={selectedTask} />
-        <select
-          defaultValue={selectedTask.type}
-          onChange={(event) => {
-            selectedTask.type = parseInt(event.target.value);
-            forceUpdate();
-          }}
-        >
-          <option value={TaskType.DUE}>Due</option>
-          <option value={TaskType.DO}>Do</option>
-        </select>
+        {estimate}
+        {taskType}
         <DatePicker task={selectedTask} />
       </div>
     </div>

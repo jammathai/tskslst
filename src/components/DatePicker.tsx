@@ -36,7 +36,7 @@ export default function DatePicker({ task }: { task: Task }) {
       picker = (
         <input
           type="date"
-          className="h-5"
+          className="h-5 border-b-2"
           defaultValue={
             task.dateFilter instanceof OnceDateFilter
               ? task.dateFilter.date.toISOString().substring(0, 10)

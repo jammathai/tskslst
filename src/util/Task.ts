@@ -34,6 +34,7 @@ export default class Task {
 
   name: string;
   color: TaskColor;
+  estimate: number;
   type: TaskType;
   dateFilter: DateFilter;
   id: number;
@@ -41,12 +42,14 @@ export default class Task {
   constructor(
     name: string,
     color: TaskColor,
+    estimate: number,
     type: TaskType,
     dateFilter: DateFilter,
     id?: number
   ) {
     this.name = name;
     this.color = color;
+    this.estimate = estimate;
     this.type = type;
     this.dateFilter = dateFilter;
     this.id = id ? id : Task.count++;

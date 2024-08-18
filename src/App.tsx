@@ -19,18 +19,21 @@ export default function App() {
     new Task(
       "Do something",
       TaskColor.RED,
+      5,
       TaskType.DO,
       new OnceDateFilter(new Date(2024, 7, 6))
     ),
     new Task(
       "Do something else",
       TaskColor.RED,
+      5,
       TaskType.DO,
       new OnceDateFilter(new Date(2024, 7, 8))
     ),
     new Task(
       "Homework",
       TaskColor.BLUE,
+      10,
       TaskType.DUE,
       new OnceDateFilter(new Date(2024, 7, 8))
     ),
