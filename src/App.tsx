@@ -3,7 +3,7 @@ import Calendar from "./components/Calendar";
 import DayPane from "./components/DayPane";
 import TaskModal from "./components/TaskModal";
 import { OnceDateFilter } from "./util/DateFilter";
-import Task, { TaskType } from "./util/Task";
+import Task, { TaskColor, TaskType } from "./util/Task";
 import { GlobalContext } from "./util/GlobalContext";
 
 export default function App() {
@@ -18,16 +18,19 @@ export default function App() {
   const [tasks, setTasks] = useState([
     new Task(
       "Do something",
+      TaskColor.RED,
       TaskType.DO,
       new OnceDateFilter(new Date(2024, 7, 6))
     ),
     new Task(
       "Do something else",
+      TaskColor.RED,
       TaskType.DO,
       new OnceDateFilter(new Date(2024, 7, 8))
     ),
     new Task(
       "Homework",
+      TaskColor.BLUE,
       TaskType.DUE,
       new OnceDateFilter(new Date(2024, 7, 8))
     ),

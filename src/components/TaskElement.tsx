@@ -6,7 +6,9 @@ export default function TaskElement({ task }: { task: Task }) {
   return (
     <>
       <li
-        className="text-white bg-blue-500 mb-0.5 p-0.5"
+        className={`text-white bg-${Task.getColor(
+          task.color
+        )}-500 mb-0.5 p-0.5`}
         onClick={() => setSelectedTask(task)}
       >
         {task.name}

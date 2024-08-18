@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import { useGlobalContext } from "../util/GlobalContext";
 import { TaskType } from "../util/Task";
 import DatePicker from "./DatePicker";
+import ColorPicker from "./ColorPicker";
 
 export default function TaskModal() {
   const { tasks, setTasks, selectedTask, setSelectedTask } = useGlobalContext();
@@ -31,6 +32,7 @@ export default function TaskModal() {
             onChange={(event) => (selectedTask.name = event.target.value)}
           />
         </h1>
+        <ColorPicker task={selectedTask} />
         <select
           defaultValue={selectedTask.type}
           onChange={(event) => {
