@@ -14,7 +14,9 @@ export default function Cell({
   const filteredTasks = [];
   for (const task of tasks) {
     if (task.dateFilter.check(date))
-      filteredTasks.push(<TaskElement task={task} key={task.id} />);
+      filteredTasks.push(
+        <TaskElement task={task} showTime={false} key={task.id} />
+      );
   }
 
   return (

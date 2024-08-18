@@ -41,11 +41,18 @@ export default function App() {
 
   return (
     <GlobalContext.Provider
-      value={{ tasks, setTasks, selectedTask, setSelectedTask }}
+      value={{
+        tasks,
+        setTasks,
+        selectedDate,
+        setSelectedDate,
+        selectedTask,
+        setSelectedTask,
+      }}
     >
       <div className="flex m-auto justify-center">
         <Calendar setSelectedDate={setSelectedDate} />
-        <DayPane selectedDate={selectedDate} />
+        <DayPane />
       </div>
       {selectedTask ? <TaskModal /> : <></>}
     </GlobalContext.Provider>

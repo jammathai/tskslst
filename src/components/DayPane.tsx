@@ -1,13 +1,21 @@
 import { useGlobalContext } from "../util/GlobalContext";
+import { TaskType } from "../util/Task";
 import TaskElement from "./TaskElement";
 
-export default function DayPane({ selectedDate }: { selectedDate: Date }) {
-  const { tasks } = useGlobalContext();
+export default function DayPane() {
+  const { tasks, selectedDate } = useGlobalContext();
 
   const filteredTasks = [];
   for (const task of tasks) {
-    if (task.dateFilter.check(selectedDate))
-      filteredTasks.push(<TaskElement task={task} key={task.id} />);
+    if (
+      (task.type === TaskType.DUE &&
+        task.dateFilter.remainingDays(selectedDate) > 0) ||
+      task.dateFilter.check(selectedDate)
+    ) {
+      filteredTasks.push(
+        <TaskElement task={task} showTime={true} key={task.id} />
+      );
+    }
   }
 
   return (

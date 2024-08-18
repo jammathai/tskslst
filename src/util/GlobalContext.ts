@@ -5,6 +5,8 @@ import Setter from "./Setter";
 export const GlobalContext = createContext<{
   tasks: Task[];
   setTasks: Setter<Task[]>;
+  selectedDate: Date;
+  setSelectedDate: Setter<Date>;
   selectedTask: Task | null;
   setSelectedTask: Setter<Task | null>;
 } | null>(null);

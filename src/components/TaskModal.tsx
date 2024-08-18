@@ -36,7 +36,8 @@ export default function TaskModal() {
         onChange={(event) =>
           (selectedTask.estimate = parseFloat(event.target.value))
         }
-      />
+      />{" "}
+      hrs
     </label>
   );
 
