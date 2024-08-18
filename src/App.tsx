@@ -2,8 +2,7 @@ import { useState } from "react";
 import Calendar from "./components/Calendar";
 import DayPane from "./components/DayPane";
 import TaskModal from "./components/TaskModal";
-import { OnceDateFilter } from "./util/DateFilter";
-import Task, { TaskColor, TaskType } from "./util/Task";
+import Task from "./util/Task";
 import { GlobalContext } from "./util/GlobalContext";
 
 export default function App() {
@@ -15,29 +14,7 @@ export default function App() {
     )
   );
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [tasks, setTasks] = useState([
-    new Task(
-      "Do something",
-      TaskColor.RED,
-      5,
-      TaskType.DO,
-      new OnceDateFilter(new Date(2024, 7, 6))
-    ),
-    new Task(
-      "Do something else",
-      TaskColor.RED,
-      5,
-      TaskType.DO,
-      new OnceDateFilter(new Date(2024, 7, 8))
-    ),
-    new Task(
-      "Homework",
-      TaskColor.BLUE,
-      10,
-      TaskType.DUE,
-      new OnceDateFilter(new Date(2024, 7, 8))
-    ),
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   return (
     <GlobalContext.Provider

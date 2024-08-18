@@ -17,9 +17,10 @@ export default function TaskModal() {
   }
 
   const h1 = (
-    <h1 className="font-bold">
+    <h1 className="font-bold border-b-2">
       <input
         className="w-full"
+        placeholder="Task name"
         defaultValue={selectedTask.name}
         onChange={(event) => (selectedTask.name = event.target.value)}
       />

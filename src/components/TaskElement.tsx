@@ -13,11 +13,7 @@ export default function TaskElement({
   const estimate =
     task.type === TaskType.DO
       ? task.estimate + " hrs"
-      : Math.round(
-          (task.estimate / task.dateFilter.remainingDays(selectedDate)) * 100
-        ) /
-          100 +
-        " hrs/day";
+      : task.dateEstimate(selectedDate) + " hrs/day";
 
   return (
     <>
@@ -30,7 +26,7 @@ export default function TaskElement({
       >
         <span className="text-white">{task.name}</span>
         {showTime ? (
-          <span className={`float-right text-white text-opacity-75`}>
+          <span className="float-right text-white text-opacity-50">
             {estimate}
           </span>
         ) : (

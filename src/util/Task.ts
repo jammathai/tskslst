@@ -54,4 +54,12 @@ export default class Task {
     this.dateFilter = dateFilter;
     this.id = id ? id : Task.count++;
   }
+
+  dateEstimate(date: Date) {
+    if (this.type === TaskType.DO) return this.estimate;
+    return (
+      Math.round((this.estimate / this.dateFilter.remainingDays(date)) * 100) /
+      100
+    );
+  }
 }
