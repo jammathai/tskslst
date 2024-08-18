@@ -26,7 +26,7 @@ export default function TaskElement({
       >
         <span className="text-white">{task.name}</span>
         {showTime ? (
-          <span className="float-right text-white text-opacity-50">
+          <span className="float-right text-white text-opacity-60">
             {estimate}
           </span>
         ) : (

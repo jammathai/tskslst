@@ -1,15 +1,15 @@
-import Setter from "../util/Setter";
 import { useGlobalContext } from "../util/GlobalContext";
 import TaskElement from "./TaskElement";
 
 export default function Cell({
   timestamp,
-  setSelectedDate,
+  inSelectedMonth,
 }: {
   timestamp: number;
-  setSelectedDate: Setter<Date>;
+  inSelectedMonth: boolean;
 }) {
-  const { tasks } = useGlobalContext();
+  const { tasks, selectedDate, setSelectedDate } = useGlobalContext();
+
   const date = new Date(timestamp);
   const filteredTasks = [];
   for (const task of tasks) {
@@ -19,11 +19,13 @@ export default function Cell({
       );
   }
 
+  let style = "size-40 p-0.5 text-xs align-top border-collapse border-2";
+  if (!inSelectedMonth) style += " bg-gray-100";
+  if (selectedDate.getTime() === date.getTime())
+    style += " outline outline-2 outline-offset-[-3px] outline-gray-200";
+
   return (
-    <td
-      onClick={() => setSelectedDate(new Date(timestamp))}
-      className="size-40 text-xs align-top border-collapse border-2"
-    >
+    <td onClick={() => setSelectedDate(new Date(timestamp))} className={style}>
       <div className="text-sm text-right">{date.getDate()}</div>
       <ul>{filteredTasks}</ul>
     </td>

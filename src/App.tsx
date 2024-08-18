@@ -28,7 +28,7 @@ export default function App() {
       }}
     >
       <div className="flex m-auto justify-center">
-        <Calendar setSelectedDate={setSelectedDate} />
+        <Calendar />
         <DayPane />
       </div>
       {selectedTask ? <TaskModal /> : <></>}

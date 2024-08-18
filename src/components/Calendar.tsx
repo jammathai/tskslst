@@ -1,12 +1,7 @@
 import { useState } from "react";
 import Cell from "./Cell";
-import Setter from "../util/Setter";
 
-export default function Calendar({
-  setSelectedDate,
-}: {
-  setSelectedDate: Setter<Date>;
-}) {
+export default function Calendar() {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
 
@@ -19,7 +14,7 @@ export default function Calendar({
       cells.push(
         <Cell
           timestamp={date.getTime()}
-          setSelectedDate={setSelectedDate}
+          inSelectedMonth={date.getMonth() === month}
           key={j}
         />
       );
@@ -58,7 +53,7 @@ export default function Calendar({
       <select onChange={(e) => setYear(parseInt(e.target.value))}>
         {yearOptions}
       </select>
-      <table className="text-left">
+      <table>
         <thead>
           <tr>
             <th>Sunday</th>
@@ -70,7 +65,7 @@ export default function Calendar({
             <th>Saturday</th>
           </tr>
         </thead>
-        <tbody>{rows}</tbody>
+        <tbody className="text-left">{rows}</tbody>
       </table>
     </div>
   );
