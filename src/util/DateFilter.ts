@@ -1,20 +1,35 @@
-export interface DateFilter {
-  check(date: Date): boolean;
-  remainingDays(date: Date): number;
+export enum RepeatType {
+  ONCE,
+  DAILY,
+  WEEKLY,
+  MONTHLY,
 }
 
-export class OnceDateFilter implements DateFilter {
-  date: Date;
+export default class DateFilter {
+  type: RepeatType;
+  date: Date | null;
+  dailyPeriod: number;
+  weekdays: boolean[] | null;
+  dayOfMonth: number | null;
 
-  constructor(date: Date) {
-    this.date = date;
+  constructor() {
+    this.type = RepeatType.ONCE;
+    this.date = null;
+    this.dailyPeriod = 1;
+    this.weekdays = null;
+    this.dayOfMonth = null;
   }
 
   check(date: Date) {
-    return date.getTime() === this.date.getTime();
-  }
-
-  remainingDays(date: Date) {
-    return (this.date.getTime() - date.getTime()) / 86400000 + 1;
+    switch (this.type) {
+      case RepeatType.ONCE:
+        return this.date !== null && date.getTime() === this.date.getTime();
+      case RepeatType.DAILY:
+        if (this.date === null) return false;
+        const days = Math.round(
+          (date.getTime() - this.date.getTime()) / 86400000
+        );
+        return days >= 0 && days % this.dailyPeriod === 0;
+    }
   }
 }

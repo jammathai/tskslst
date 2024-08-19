@@ -1,4 +1,4 @@
-import { OnceDateFilter } from "../util/DateFilter";
+import DateFilter from "../util/DateFilter";
 import { useGlobalContext } from "../util/GlobalContext";
 import Task, { TaskColor, TaskType } from "../util/Task";
 import TaskElement from "./TaskElement";
@@ -10,8 +10,7 @@ export default function DayPane() {
   let totalEstimate = 0;
   for (const task of tasks) {
     if (
-      (task.type === TaskType.DUE &&
-        task.dateFilter.remainingDays(selectedDate) > 0) ||
+      (task.type === TaskType.DUE && task.remainingDays(selectedDate) > 0) ||
       task.dateFilter.check(selectedDate)
     ) {
       totalEstimate += task.dateEstimate(selectedDate);
@@ -39,7 +38,7 @@ export default function DayPane() {
             TaskColor.RED,
             0,
             TaskType.DO,
-            new OnceDateFilter(selectedDate)
+            new DateFilter()
           );
           setTasks([...tasks, newTask]);
           setSelectedTask(newTask);

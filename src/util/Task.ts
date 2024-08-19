@@ -1,4 +1,4 @@
-import { DateFilter } from "./DateFilter";
+import DateFilter from "./DateFilter";
 
 export enum TaskType {
   DUE,
@@ -55,11 +55,16 @@ export default class Task {
     this.id = id ? id : Task.count++;
   }
 
+  remainingDays(date: Date) {
+    if (this.dateFilter.date === null) return -1;
+    return (
+      Math.round((this.dateFilter.date.getTime() - date.getTime()) / 86400000) +
+      1
+    );
+  }
+
   dateEstimate(date: Date) {
     if (this.type === TaskType.DO) return this.estimate;
-    return (
-      Math.round((this.estimate / this.dateFilter.remainingDays(date)) * 100) /
-      100
-    );
+    return Math.round((this.estimate / this.remainingDays(date)) * 100) / 100;
   }
 }
