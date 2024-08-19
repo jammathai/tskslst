@@ -12,12 +12,13 @@ export default function Cell({
 
   const date = new Date(timestamp);
   const filteredTasks = [];
-  for (const task of tasks) {
-    if (task.dateFilter.check(date))
-      filteredTasks.push(
-        <TaskElement task={task} showTime={false} key={task.id} />
-      );
-  }
+  if (timestamp > new Date().getTime() - 86400000)
+    for (const task of tasks) {
+      if (task.dateFilter.check(date))
+        filteredTasks.push(
+          <TaskElement task={task} showTime={false} key={task.id} />
+        );
+    }
 
   let style = "size-40 p-0.5 text-xs align-top border-collapse border-2";
   if (timestamp < new Date().getTime() - 86400000) style += " bg-gray-100";

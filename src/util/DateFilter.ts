@@ -8,6 +8,7 @@ export enum RepeatType {
 export default class DateFilter {
   type: RepeatType;
   date: Date | null;
+  endDate: Date | null;
   dailyPeriod: number;
   weekdays: boolean[];
   dayOfMonth: number;
@@ -15,9 +16,18 @@ export default class DateFilter {
   constructor() {
     this.type = RepeatType.ONCE;
     this.date = null;
+    this.endDate = null;
     this.dailyPeriod = 1;
     this.weekdays = [false, false, false, false, false, false, false];
     this.dayOfMonth = 1;
+  }
+
+  inRange(date: Date) {
+    if (this.date === null || this.endDate === null) return true;
+    return (
+      date.getTime() >= this.date.getTime() &&
+      date.getTime() <= this.endDate.getTime()
+    );
   }
 
   check(date: Date) {
@@ -30,13 +40,13 @@ export default class DateFilter {
         const days = Math.round(
           (date.getTime() - this.date.getTime()) / 86400000
         );
-        return days >= 0 && days % this.dailyPeriod === 0;
+        return this.inRange(date) && days % this.dailyPeriod === 0;
 
       case RepeatType.WEEKLY:
-        return this.weekdays[date.getDay()];
+        return this.inRange(date) && this.weekdays[date.getDay()];
 
       case RepeatType.MONTHLY:
-        return date.getDate() === this.dayOfMonth;
+        return this.inRange(date) && date.getDate() === this.dayOfMonth;
     }
   }
 }

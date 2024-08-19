@@ -56,7 +56,7 @@ function DailyDatePicker({ task }: { task: Task }) {
         <option value="5">every 5 days</option>
         <option value="6">every 6 days</option>
       </select>{" "}
-      starting{" "}
+      from{" "}
       <input
         type="date"
         className="h-5 border-b-2"
@@ -67,6 +67,19 @@ function DailyDatePicker({ task }: { task: Task }) {
         }
         onChange={(event) => {
           task.dateFilter.date = new Date(event.target.value + "T00:00:00");
+        }}
+      />{" "}
+      to{" "}
+      <input
+        type="date"
+        className="h-5 border-b-2"
+        defaultValue={
+          task.dateFilter.endDate === null
+            ? ""
+            : task.dateFilter.endDate.toISOString().substring(0, 10)
+        }
+        onChange={(event) => {
+          task.dateFilter.endDate = new Date(event.target.value + "T00:00:00");
         }}
       />
     </>
@@ -134,7 +147,33 @@ function WeeklyDatePicker({ task }: { task: Task }) {
         onClick={() => toggleDay(Weekday.SATURDAY)}
       >
         S
-      </button>
+      </button>{" "}
+      from{" "}
+      <input
+        type="date"
+        className="h-5 border-b-2"
+        defaultValue={
+          task.dateFilter.date === null
+            ? ""
+            : task.dateFilter.date.toISOString().substring(0, 10)
+        }
+        onChange={(event) => {
+          task.dateFilter.date = new Date(event.target.value + "T00:00:00");
+        }}
+      />{" "}
+      to{" "}
+      <input
+        type="date"
+        className="h-5 border-b-2"
+        defaultValue={
+          task.dateFilter.endDate === null
+            ? ""
+            : task.dateFilter.endDate.toISOString().substring(0, 10)
+        }
+        onChange={(event) => {
+          task.dateFilter.endDate = new Date(event.target.value + "T00:00:00");
+        }}
+      />
     </>
   );
 }
@@ -144,7 +183,6 @@ function MonthlyDatePicker({ task }: { task: Task }) {
 
   return (
     <>
-      <br />
       on the{" "}
       <select
         defaultValue={
@@ -186,7 +224,32 @@ function MonthlyDatePicker({ task }: { task: Task }) {
         <option value="30">30th</option>
         <option value="31">31st</option>
       </select>{" "}
-      of every month
+      of every month from{" "}
+      <input
+        type="date"
+        className="h-5 border-b-2"
+        defaultValue={
+          task.dateFilter.date === null
+            ? ""
+            : task.dateFilter.date.toISOString().substring(0, 10)
+        }
+        onChange={(event) => {
+          task.dateFilter.date = new Date(event.target.value + "T00:00:00");
+        }}
+      />{" "}
+      to{" "}
+      <input
+        type="date"
+        className="h-5 border-b-2"
+        defaultValue={
+          task.dateFilter.endDate === null
+            ? ""
+            : task.dateFilter.endDate.toISOString().substring(0, 10)
+        }
+        onChange={(event) => {
+          task.dateFilter.endDate = new Date(event.target.value + "T00:00:00");
+        }}
+      />
     </>
   );
 }

@@ -61,7 +61,7 @@ export default function TaskModal() {
       onClick={closeModal}
     >
       <div
-        className="w-80 h-40 m-auto p-2 bg-white"
+        className="w-96 h-40 m-auto p-2 bg-white"
         onClick={(event) => event.stopPropagation()}
       >
         {h1}
