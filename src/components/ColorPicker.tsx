@@ -10,9 +10,11 @@ export default function ColorPicker({ task }: { task: Task }) {
   }
 
   function getButtonStyle(color: TaskColor) {
-    let style = `inline-block align-middle w-4 h-4 rounded-full bg-${Task.getColor(
+    let style = `inline-block align-middle size-3 rounded-full bg-${Task.getColor(
       color
-    )}-500 outline-2 outline-offset-1 outline-${Task.getColor(color)}-500 mr-1`;
+    )}-500 outline-2 outline-offset-1 outline-${Task.getColor(
+      color
+    )}-500 mr-1.5`;
     if (color === task.color) style += " outline";
     if (color !== TaskColor.PINK) style += " mr-1";
     return style;

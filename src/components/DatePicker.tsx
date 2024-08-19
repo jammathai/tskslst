@@ -2,6 +2,16 @@ import { useReducer } from "react";
 import Task, { TaskType } from "../util/Task";
 import { RepeatType } from "../util/DateFilter";
 
+enum Weekday {
+  SUNDAY,
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY,
+}
+
 function OnceDatePicker({ task }: { task: Task }) {
   if (task.dateFilter.type !== RepeatType.ONCE) return <></>;
 
@@ -63,6 +73,72 @@ function DailyDatePicker({ task }: { task: Task }) {
   );
 }
 
+function WeeklyDatePicker({ task }: { task: Task }) {
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+
+  if (task.dateFilter.type !== RepeatType.WEEKLY) return <></>;
+
+  function getButtonStyle(day: Weekday) {
+    return `size-5 leading-3 bg-${
+      task.dateFilter.weekdays[day]
+        ? Task.getColor(task.color) + "-500 text-white"
+        : "gray-200"
+    } rounded-full mr-0.5`;
+  }
+
+  function toggleDay(day: Weekday) {
+    task.dateFilter.weekdays[day] = !task.dateFilter.weekdays[day];
+    forceUpdate();
+  }
+
+  return (
+    <>
+      <button
+        className={getButtonStyle(Weekday.SUNDAY)}
+        onClick={() => toggleDay(Weekday.SUNDAY)}
+      >
+        S
+      </button>
+      <button
+        className={getButtonStyle(Weekday.MONDAY)}
+        onClick={() => toggleDay(Weekday.MONDAY)}
+      >
+        M
+      </button>
+      <button
+        className={getButtonStyle(Weekday.TUESDAY)}
+        onClick={() => toggleDay(Weekday.TUESDAY)}
+      >
+        T
+      </button>
+      <button
+        className={getButtonStyle(Weekday.WEDNESDAY)}
+        onClick={() => toggleDay(Weekday.WEDNESDAY)}
+      >
+        W
+      </button>
+      <button
+        className={getButtonStyle(Weekday.THURSDAY)}
+        onClick={() => toggleDay(Weekday.THURSDAY)}
+      >
+        T
+      </button>
+      <button
+        className={getButtonStyle(Weekday.FRIDAY)}
+        onClick={() => toggleDay(Weekday.FRIDAY)}
+      >
+        F
+      </button>
+      <button
+        className={getButtonStyle(Weekday.SATURDAY)}
+        onClick={() => toggleDay(Weekday.SATURDAY)}
+      >
+        S
+      </button>
+    </>
+  );
+}
+
 export default function DatePicker({ task }: { task: Task }) {
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
@@ -94,6 +170,7 @@ export default function DatePicker({ task }: { task: Task }) {
     <>
       {repeatTypeSelect} <OnceDatePicker task={task} />
       <DailyDatePicker task={task} />
+      <WeeklyDatePicker task={task} />
     </>
   );
 }
