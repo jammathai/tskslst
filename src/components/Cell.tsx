@@ -20,13 +20,14 @@ export default function Cell({
   }
 
   let style = "size-40 p-0.5 text-xs align-top border-collapse border-2";
-  if (!inSelectedMonth) style += " bg-gray-100";
+  if (timestamp < new Date().getTime() - 86400000) style += " bg-gray-100";
+  if (!inSelectedMonth) style += " text-gray-200";
   if (selectedDate.getTime() === date.getTime())
     style += " outline outline-2 outline-offset-[-3px] outline-gray-200";
 
   return (
     <td onClick={() => setSelectedDate(new Date(timestamp))} className={style}>
-      <div className="text-sm text-right">{date.getDate()}</div>
+      <div className="text-sm text-right pr-0.5">{date.getDate()}</div>
       <ul>{filteredTasks}</ul>
     </td>
   );
