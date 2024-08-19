@@ -92,7 +92,7 @@ function WeeklyDatePicker({ task }: { task: Task }) {
   if (task.dateFilter.type !== RepeatType.WEEKLY) return <></>;
 
   function getButtonStyle(day: Weekday) {
-    return `size-5 leading-3 bg-${
+    return `size-5 text-sm bg-${
       task.dateFilter.weekdays[day]
         ? Task.getColor(task.color) + "-500 text-white"
         : "gray-200"

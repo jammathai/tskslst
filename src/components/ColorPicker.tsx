@@ -1,23 +1,21 @@
-import { useReducer } from "react";
 import Task, { TaskColor } from "../util/Task";
 
-export default function ColorPicker({ task }: { task: Task }) {
-  const [, forceUpdate] = useReducer((x) => x + 1, 0);
-
+export default function ColorPicker({
+  task,
+  forceUpdate,
+}: {
+  task: Task;
+  forceUpdate: React.DispatchWithoutAction;
+}) {
   function setColor(color: TaskColor) {
     task.color = color;
     forceUpdate();
   }
 
   function getButtonStyle(color: TaskColor) {
-    let style = `inline-block align-middle size-3 rounded-full bg-${Task.getColor(
+    return `inline-block align-middle size-4 rounded-full bg-${Task.getColor(
       color
-    )}-500 outline-2 outline-offset-1 outline-${Task.getColor(
-      color
-    )}-500 mr-1.5`;
-    if (color === task.color) style += " outline";
-    if (color !== TaskColor.PINK) style += " mr-1";
-    return style;
+    )}-${color === task.color ? "500" : "200"} mr-1`;
   }
 
   return (

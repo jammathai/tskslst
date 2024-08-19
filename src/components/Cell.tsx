@@ -20,7 +20,7 @@ export default function Cell({
         );
     }
 
-  let style = "size-40 p-0.5 text-xs align-top border-collapse border-2";
+  let style = "size-32 p-0.5 text-xs align-top border-collapse border-2";
   if (timestamp < new Date().getTime() - 86400000) style += " bg-gray-100";
   if (!inSelectedMonth) style += " text-gray-200";
   if (selectedDate.getTime() === date.getTime())

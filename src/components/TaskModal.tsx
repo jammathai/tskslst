@@ -65,7 +65,7 @@ export default function TaskModal() {
         onClick={(event) => event.stopPropagation()}
       >
         {h1}
-        <ColorPicker task={selectedTask} />
+        <ColorPicker task={selectedTask} forceUpdate={forceUpdate} />
         {estimate}
         {taskType}
         <DatePicker task={selectedTask} />

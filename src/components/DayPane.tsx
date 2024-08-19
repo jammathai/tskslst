@@ -31,7 +31,7 @@ export default function DayPane() {
         })}
       </h1>
       <button
-        className="float-right"
+        className="text-2xl leading-5 float-right"
         onClick={() => {
           const newTask = new Task(
             "",
@@ -44,7 +44,7 @@ export default function DayPane() {
           setSelectedTask(newTask);
         }}
       >
-        ➕
+        +
       </button>
       <ul className="text-sm">{filteredTasks}</ul>
       <hr />
