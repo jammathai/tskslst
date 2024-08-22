@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "./components/Calendar";
 import DayPane from "./components/DayPane";
 import TaskModal from "./components/TaskModal";
 import Task from "./util/Task";
 import { GlobalContext } from "./util/GlobalContext";
+import { load, save } from "./util/save";
 
 export default function App() {
   const [selectedDate, setSelectedDate] = useState(
@@ -14,7 +15,11 @@ export default function App() {
     )
   );
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(load());
+
+  useEffect(() => {
+    save(tasks);
+  }, [tasks]);
 
   return (
     <GlobalContext.Provider

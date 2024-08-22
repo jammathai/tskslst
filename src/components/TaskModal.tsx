@@ -16,6 +16,12 @@ export default function TaskModal() {
     setSelectedTask(null);
   }
 
+  function deleteTask() {
+    if (selectedTask === null) return;
+    setTasks(tasks.filter((task) => task.id !== selectedTask.id));
+    setSelectedTask(null);
+  }
+
   const h1 = (
     <h1 className="font-bold border-b-2">
       <input
@@ -25,6 +31,15 @@ export default function TaskModal() {
         onChange={(event) => (selectedTask.name = event.target.value)}
       />
     </h1>
+  );
+
+  const deleteButton = (
+    <button
+      className="float-right text-red-500 hover:underline"
+      onClick={deleteTask}
+    >
+      Delete
+    </button>
   );
 
   const estimate = (
@@ -65,6 +80,7 @@ export default function TaskModal() {
         onClick={(event) => event.stopPropagation()}
       >
         {h1}
+        {deleteButton}
         <ColorPicker task={selectedTask} forceUpdate={forceUpdate} />
         {estimate}
         {taskType}

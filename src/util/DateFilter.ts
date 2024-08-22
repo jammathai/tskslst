@@ -37,10 +37,12 @@ export default class DateFilter {
 
       case RepeatType.DAILY:
         if (this.date === null) return false;
-        const days = Math.round(
-          (date.getTime() - this.date.getTime()) / 86400000
+        return (
+          this.inRange(date) &&
+          Math.round((date.getTime() - this.date.getTime()) / 86400000) %
+            this.dailyPeriod ===
+            0
         );
-        return this.inRange(date) && days % this.dailyPeriod === 0;
 
       case RepeatType.WEEKLY:
         return this.inRange(date) && this.weekdays[date.getDay()];
