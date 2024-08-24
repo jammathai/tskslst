@@ -12,13 +12,15 @@ export default function Cell({
 
   const date = new Date(timestamp);
   const filteredTasks = [];
-  if (timestamp > new Date().getTime() - 86400000)
+  if (timestamp > new Date().getTime() - 86400000) {
     for (const task of tasks) {
-      if (task.dateFilter.check(date))
-        filteredTasks.push(
-          <TaskElement task={task} showTime={false} key={task.id} />
-        );
+      if (task.dateFilter.check(date)) filteredTasks.push(task);
     }
+  }
+  filteredTasks.sort((a, b) => b.estimate - a.estimate);
+  const taskElements = filteredTasks.map((task) => (
+    <TaskElement task={task} showTime={false} key={task.id} />
+  ));
 
   let style = "size-32 p-0.5 text-xs align-top border-collapse border-2";
   if (timestamp < new Date().getTime() - 86400000) style += " bg-gray-100";
@@ -29,7 +31,7 @@ export default function Cell({
   return (
     <td onClick={() => setSelectedDate(new Date(timestamp))} className={style}>
       <div className="text-sm text-right pr-0.5">{date.getDate()}</div>
-      <ul>{filteredTasks}</ul>
+      <ul>{taskElements}</ul>
     </td>
   );
 }

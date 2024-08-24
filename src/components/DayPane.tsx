@@ -14,11 +14,17 @@ export default function DayPane() {
       task.dateFilter.check(selectedDate)
     ) {
       totalEstimate += task.dateEstimate(selectedDate);
-      filteredTasks.push(
-        <TaskElement task={task} showTime={true} key={task.id} />
-      );
+      filteredTasks.push(task);
     }
   }
+  filteredTasks.sort(
+    (a, b) =>
+      (b.type === TaskType.DO ? b.estimate : b.dateEstimate(selectedDate)) -
+      (a.type === TaskType.DO ? a.estimate : a.dateEstimate(selectedDate))
+  );
+  const taskElements = filteredTasks.map((task) => (
+    <TaskElement task={task} showTime={true} key={task.id} />
+  ));
 
   return (
     <div className="w-80 ml-2">
@@ -46,7 +52,7 @@ export default function DayPane() {
       >
         +
       </button>
-      <ul className="text-sm">{filteredTasks}</ul>
+      <ul className="text-sm">{taskElements}</ul>
       <hr />
       <span>Total</span>
       <span className="float-right text-black text-opacity-50">
