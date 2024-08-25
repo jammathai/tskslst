@@ -2,6 +2,9 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   safelist: [
+    "size-32",
+    "size-40",
+    "overflow-auto",
     "bg-red-500",
     "bg-orange-500",
     "bg-yellow-500",

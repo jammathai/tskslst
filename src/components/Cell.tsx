@@ -22,16 +22,25 @@ export default function Cell({
     <TaskElement task={task} showTime={false} key={task.id} />
   ));
 
-  let style = "size-32 p-0.5 text-xs align-top border-collapse border-2";
-  if (timestamp < new Date().getTime() - 86400000) style += " bg-gray-100";
-  if (!inSelectedMonth) style += " text-gray-200";
+  let tdStyle = "text-xs align-top border-collapse border-2";
+  if (timestamp < new Date().getTime() - 86400000) tdStyle += " bg-gray-100";
+  if (!inSelectedMonth) tdStyle += " text-gray-200";
   if (selectedDate.getTime() === date.getTime())
-    style += " outline outline-2 outline-offset-[-3px] outline-gray-200";
+    tdStyle += " outline outline-2 outline-offset-[-3px] outline-gray-200";
 
   return (
-    <td onClick={() => setSelectedDate(new Date(timestamp))} className={style}>
-      <div className="text-sm text-right pr-0.5">{date.getDate()}</div>
-      <ul>{taskElements}</ul>
+    <td
+      onClick={() => setSelectedDate(new Date(timestamp))}
+      className={tdStyle}
+    >
+      <div
+        className={`size-${
+          window.innerHeight < 1020 ? 32 : 40
+        } p-0.5 overflow-auto`}
+      >
+        <div className="text-sm text-right pr-0.5">{date.getDate()}</div>
+        <ul>{taskElements}</ul>
+      </div>
     </td>
   );
 }

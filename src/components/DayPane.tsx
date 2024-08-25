@@ -44,7 +44,7 @@ export default function DayPane() {
             TaskColor.RED,
             0,
             TaskType.DO,
-            new DateFilter()
+            new DateFilter(selectedDate)
           );
           setTasks([...tasks, newTask]);
           setSelectedTask(newTask);

@@ -13,9 +13,9 @@ export default class DateFilter {
   weekdays: boolean[];
   dayOfMonth: number;
 
-  constructor() {
+  constructor(date: Date) {
     this.type = RepeatType.ONCE;
-    this.date = null;
+    this.date = date;
     this.endDate = null;
     this.dailyPeriod = 1;
     this.weekdays = [false, false, false, false, false, false, false];
