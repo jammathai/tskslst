@@ -22,6 +22,8 @@ export default {
     "bg-purple-200",
     "bg-pink-200",
     "bg-gray-200",
+    "border-b-2",
+    "border-red-200",
   ],
   theme: {
     extend: {},

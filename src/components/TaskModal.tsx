@@ -12,6 +12,7 @@ export default function TaskModal() {
     throw new Error("Attempted to render task modal with no task selected.");
 
   function closeModal() {
+    if (!selectedTask || selectedTask.name === "") return;
     setTasks([...tasks]);
     setSelectedTask(null);
   }
@@ -23,12 +24,19 @@ export default function TaskModal() {
   }
 
   const h1 = (
-    <h1 className="font-bold border-b-2">
+    <h1
+      className={`font-bold border-b-2${
+        selectedTask.name === "" ? " border-red-200" : ""
+      }`}
+    >
       <input
         className="w-full"
         placeholder="Task name"
         defaultValue={selectedTask.name}
-        onChange={(event) => (selectedTask.name = event.target.value)}
+        onChange={(event) => {
+          selectedTask.name = event.target.value;
+          forceUpdate();
+        }}
       />
     </h1>
   );
